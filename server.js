@@ -20,8 +20,7 @@ const port = process.env.PORT || 5000;
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  throw new Error("error");
-  res.send("Welcome");
+  res.json({ msg: "Welcome" });
 });
 
 app.use("/api/v1/auth", authRouter);
