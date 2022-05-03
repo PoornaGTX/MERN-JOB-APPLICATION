@@ -32,7 +32,7 @@ const UserSchema = new mongoose.Schema({
     maxlength: 20,
     default: "lastName",
   },
-  lastName: {
+  location: {
     type: String,
     trim: true,
     maxlength: 20,
@@ -50,6 +50,11 @@ UserSchema.methods.createJWT = function () {
   return jwt.sign({ userId: this._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_LIFETIME,
   });
+};
+
+UserSchema.methods.comparePassword = async function (candidatePassword) {
+  const isMatch = await bcrypt.compare(candidatePassword, this.password);
+  return isMatch;
 };
 
 export default mongoose.model("User", UserSchema);

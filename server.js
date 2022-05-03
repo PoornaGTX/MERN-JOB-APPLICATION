@@ -3,6 +3,7 @@ const app = express();
 import dotenv from "dotenv";
 dotenv.config();
 import "express-async-errors";
+import morgan from "morgan";
 
 // db and authenticateUser
 import connectDB from "./db/connect.js";
@@ -17,6 +18,9 @@ import notFoundMiddleware from "./middleware/not-found.js";
 
 const port = process.env.PORT || 5000;
 
+if (process.env.NODE_ENV !== "production") {
+  app.use(morgan("dev"));
+}
 app.use(express.json());
 
 app.get("/", (req, res) => {
