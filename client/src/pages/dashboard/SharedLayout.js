@@ -3,18 +3,21 @@ import { Outlet, Link } from "react-router-dom";
 import Wrapper from "../../assets/wrappers/SharedLayout";
 import { Navbar, SmallSidebar, BigSidebar } from "../../components";
 
-export const SharedLayout = () => {
+const SharedLayout = () => {
   return (
     <Wrapper>
-      <nav>
-        <main className="dashboard">
-          <SmallSidebar />
-          <BigSidebar />
+      <main className="dashboard">
+        <SmallSidebar />
+        <BigSidebar />
+        {/*only one will be render at a time because of the screen size SmallSidebar BigSidebar */}
+        <div>
+          <Navbar />
 
-          <div></div>
-        </main>
-      </nav>
-      <Outlet />
+          <div className="dashboard-page">
+            <Outlet />
+          </div>
+        </div>
+      </main>
     </Wrapper>
   );
 };
