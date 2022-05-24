@@ -2,7 +2,10 @@ import express from "express";
 const app = express();
 import dotenv from "dotenv";
 dotenv.config();
+
+//error handler
 import "express-async-errors";
+
 import morgan from "morgan";
 
 // db and authenticateUser
@@ -31,6 +34,7 @@ app.get("/", (req, res) => {
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/jobs", authenticateUser, jobsRouter);
 
+//udathiyana route walin ekakwath newei nam notFoundMiddleware eka hit wenawa
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
